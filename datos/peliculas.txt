@@ -1,0 +1,10 @@
+P001;Minecraft La Película;Aventura;Todo público;100;minecraft.png
+P002;Intensamente 2;Animación;Todo público;96;intensamente2.png
+P003;Avengers Endgame;Acción;+12;181;avengers.png
+P004;Spider-Man No Way Home;Acción;+12;148;spiderman.png
+P005;El Conjuro;Terror;+16;112;conjuro.png
+P006;Super Mario Bros La Película;Animación;Todo público;92;mario.png
+P007;Avatar El Camino del Agua;Ciencia ficción;+12;192;avatar.png
+P008;Rápidos y Furiosos X;Acción;+12;141;rapidos.png
+P009;Coco;Animación;Todo público;105;coco.png
+P010;Jurassic World;Aventura;+12;124;jurassic.png
