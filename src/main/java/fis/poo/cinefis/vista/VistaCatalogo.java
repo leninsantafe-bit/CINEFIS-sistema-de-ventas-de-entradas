@@ -51,6 +51,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
         lblPoster = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaSinopsis = new javax.swing.JTextArea();
+        lblTituloPoster1 = new javax.swing.JLabel();
         panelBotones = new javax.swing.JPanel();
         btnSeleccionarFuncion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -152,9 +153,17 @@ public class VistaCatalogo extends javax.swing.JFrame {
         lblPoster.setForeground(new java.awt.Color(200, 200, 200));
         lblPoster.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txaSinopsis.setBackground(new java.awt.Color(18, 28, 38));
         txaSinopsis.setColumns(20);
+        txaSinopsis.setForeground(new java.awt.Color(255, 255, 255));
         txaSinopsis.setRows(5);
+        txaSinopsis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(218, 165, 32)));
         jScrollPane2.setViewportView(txaSinopsis);
+
+        lblTituloPoster1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblTituloPoster1.setForeground(new java.awt.Color(240, 240, 240));
+        lblTituloPoster1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloPoster1.setText("Sinopsis");
 
         javax.swing.GroupLayout panelPosterLayout = new javax.swing.GroupLayout(panelPoster);
         panelPoster.setLayout(panelPosterLayout);
@@ -163,6 +172,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
             .addGroup(panelPosterLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(panelPosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloPoster1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTituloPoster))
@@ -175,9 +185,11 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 .addComponent(lblTituloPoster)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTituloPoster1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         panelBotones.setBackground(new java.awt.Color(10, 14, 20));
@@ -262,8 +274,8 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 .addComponent(lblSubtitulo)
                 .addGap(18, 18, 18)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelPoster, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                    .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
+                    .addComponent(panelPoster, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                    .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +298,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -342,6 +354,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubtitulo1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTituloPoster;
+    private javax.swing.JLabel lblTituloPoster1;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelPoster;
     private javax.swing.JPanel panelPrincipal;

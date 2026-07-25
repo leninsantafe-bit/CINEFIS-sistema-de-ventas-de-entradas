@@ -1,10 +1,10 @@
 P001;Minecraft La Película;Aventura;Todo público;100;minecraft.png;Cuatro inadaptados atraviesan un portal hacia un mundo cúbico y deben aprender a dominarlo para regresar a casa.
 P002;Intensamente 2;Animación;Todo público;96;intensamente2.png;Riley entra en la adolescencia y nuevas emociones llegan al centro de control de su mente.
-P003;Avengers Endgame;Acción;+12;181;avengers.png;[Inserte sinopsis]
-P004;Spider-Man No Way Home;Acción;+12;148;spiderman.png;[Inserte sinopsis]
-P005;El Conjuro;Terror;+16;112;conjuro.png;[Inserte sinopsis]
-P006;Super Mario Bros La Película;Animación;Todo público;92;mario.png;[Inserte sinopsis]
-P007;Avatar El Camino del Agua;Ciencia ficción;+12;192;avatar.png;[Inserte sinopsis]
-P008;Rápidos y Furiosos X;Acción;+12;141;rapidos.png;[Inserte sinopsis]
-P009;Coco;Animación;Todo público;105;coco.png;[Inserte sinopsis]
-P010;Jurassic World;Aventura;+12;124;jurassic.png;[Inserte sinopsis]
+P003;Avengers Endgame;Acción;+12;181;avengers.png;Los Vengadores sobrevivientes reúnen sus fuerzas para revertir las consecuencias de Thanos y restaurar el universo.
+P004;Spider-Man No Way Home;Acción;+12;148;spiderman.png;Peter Parker busca recuperar su vida después de que su identidad es revelada, pero un hechizo abre las puertas del multiverso.
+P005;El Conjuro;Terror;+16;112;conjuro.png;Una familia se muda a una antigua casa donde sucesos paranormales los llevan a buscar la ayuda de dos investigadores.
+P006;Super Mario Bros La Película;Animación;Todo público;92;mario.png;Mario viaja por un mundo mágico junto a nuevos aliados para rescatar a su hermano Luigi del malvado Bowser.
+P007;Avatar El Camino del Agua;Ciencia ficción;+12;192;avatar.png;Jake Sully y su familia buscan refugio con un clan de los océanos de Pandora mientras enfrentan una nueva amenaza.
+P008;Rápidos y Furiosos X;Acción;+12;141;rapidos.png;Dominic Toretto y su familia se enfrentan a un enemigo decidido a vengarse por acontecimientos ocurridos en el pasado.
+P009;Coco;Animación;Todo público;105;coco.png;Miguel viaja accidentalmente al mundo de los muertos, donde busca descubrir la historia de su familia y cumplir su sueño musical.
+P010;Jurassic World;Aventura;+12;124;jurassic.png;Un dinosaurio creado genéticamente escapa en un parque temático y pone en peligro a todos sus visitantes.
