@@ -1,14 +1,7 @@
 package fis.poo.cinefis.vista;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author ksang
- */
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class VistaLogin extends javax.swing.JFrame {
     
@@ -315,16 +308,16 @@ public class VistaLogin extends javax.swing.JFrame {
         return new String(txtContrasena.getPassword());
     }
 
-    public void agregarEventoIngresar(java.awt.event.ActionListener listener) {
+    public void agregarEventoIngresar(ActionListener listener) {
         btnIngresar.addActionListener(listener);
     }
 
-    public void agregarEventoSalir(java.awt.event.ActionListener listener) {
+    public void agregarEventoSalir(ActionListener listener) {
         btnSalir.addActionListener(listener);
     }
 
     public void mostrarMensaje(String mensaje) {
-        javax.swing.JOptionPane.showMessageDialog(this, mensaje);
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 
     public void limpiarCampos() {

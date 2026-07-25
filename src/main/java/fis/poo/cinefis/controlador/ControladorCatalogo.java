@@ -80,10 +80,8 @@ public class ControladorCatalogo {
     }
 
     private void cerrarSesion() {
-        sesionCompra.reiniciar();
-
         vista.dispose();
-        aplicacion.mostrarLogin();
+        aplicacion.cerrarSesion();
     }
 
     private void salir() {

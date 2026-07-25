@@ -1,6 +1,7 @@
 package fis.poo.cinefis.controlador;
 
 import fis.poo.cinefis.modelo.SesionCompra;
+import fis.poo.cinefis.modelo.Usuario;
 import fis.poo.cinefis.vista.VistaCatalogo;
 import fis.poo.cinefis.vista.VistaCompra;
 import fis.poo.cinefis.vista.VistaLogin;
@@ -27,8 +28,7 @@ public class ControladorAplicacion {
 
         VistaLogin vistaLogin = new VistaLogin();
 
-        ControladorLogin controladorLogin =
-                new ControladorLogin(vistaLogin, this);
+        ControladorLogin controladorLogin = new ControladorLogin(vistaLogin, this);
 
         controladorLogin.iniciar();
     }
@@ -59,6 +59,14 @@ public class ControladorAplicacion {
 
         controladorAsientos.iniciar();
     }
+    
+    public void establecerUsuarioAutenticado(Usuario usuario) {
+        sesionCompra.setUsuarioAutenticado(usuario);
+    }
+    
+    public Usuario obtenerUsuarioAutenticado() {
+        return sesionCompra.getUsuarioAutenticado();
+    }
 
     public void mostrarCompra() {
         VistaCompra vistaCompra =
@@ -86,7 +94,6 @@ public class ControladorAplicacion {
         controladorResumen.iniciar();
     }
 
-    
     //Inicia una nueva compra sin cerrar la sesión.
     
     public void iniciarNuevaCompra() {
@@ -96,5 +103,10 @@ public class ControladorAplicacion {
 
     public SesionCompra getSesionCompra() {
         return sesionCompra;
+    }
+    
+    public void cerrarSesion() {
+        sesionCompra.cerrarSesion();
+        mostrarLogin();
     }
 }

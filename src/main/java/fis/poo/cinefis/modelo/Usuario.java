@@ -2,18 +2,22 @@ package fis.poo.cinefis.modelo;
 
 public class Usuario {
 
-    private String nombreUsuario;
-    private String contrasena;
-    private String rol;
+    private final String username;
+    private final String contrasena;
+    private final String rol;
 
-    public Usuario(String nombreUsuario, String contrasena, String rol) {
-        this.nombreUsuario = nombreUsuario;
+    public Usuario(
+            String username,
+            String contrasena,
+            String rol
+    ) {
+        this.username = username;
         this.contrasena = contrasena;
         this.rol = rol;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsername() {
+        return username;
     }
 
     public String getContrasena() {
@@ -24,7 +28,12 @@ public class Usuario {
         return rol;
     }
 
-    public boolean validarCredenciales(String usuario, String contrasena) {
-        return this.nombreUsuario.equals(usuario) && this.contrasena.equals(contrasena);
+    public boolean credencialesCoinciden(String username, String contrasena) {
+        return this.username.equals(username) && this.contrasena.equals(contrasena);
+    }
+
+    @Override
+    public String toString() {
+        return username + " - " + rol;
     }
 }

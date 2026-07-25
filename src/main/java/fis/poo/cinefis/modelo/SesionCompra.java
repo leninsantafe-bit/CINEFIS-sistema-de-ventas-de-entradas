@@ -8,6 +8,7 @@ public class SesionCompra {
     private Funcion funcionSeleccionada;
     private ArrayList<String> asientosSeleccionados;
     private Venta venta;
+    private Usuario usuarioAutenticado;
 
     public SesionCompra() {
         asientosSeleccionados = new ArrayList<>();
@@ -36,6 +37,14 @@ public class SesionCompra {
     public void setVenta(Venta venta) {
         this.venta = venta;
     }
+
+    public Usuario getUsuarioAutenticado() {
+        return usuarioAutenticado;
+    }
+
+    public void setUsuarioAutenticado(Usuario usuarioAutenticado) {
+        this.usuarioAutenticado = usuarioAutenticado;
+    }
     
     //Limpia toda la compra actual
     public void reiniciar() {
@@ -50,4 +59,12 @@ public class SesionCompra {
         asientosSeleccionados.clear();
         venta = null;
     }
+    
+    public void cerrarSesion() {
+        funcionSeleccionada = null;
+        asientosSeleccionados.clear();
+        venta = null;
+        usuarioAutenticado = null;
+    }
+    
 }

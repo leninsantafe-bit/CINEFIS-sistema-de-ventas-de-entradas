@@ -57,10 +57,7 @@ public class ControladorCompra {
 
     public void iniciar() {
         if (sesionCompra.getFuncionSeleccionada() == null) {
-            vista.mostrarMensaje(
-                    "No existe una función seleccionada."
-            );
-
+            vista.mostrarMensaje("No existe una función seleccionada.");
             vista.dispose();
             aplicacion.mostrarCatalogo();
             return;
@@ -70,10 +67,7 @@ public class ControladorCompra {
                 .getAsientosSeleccionados()
                 .isEmpty()) {
 
-            vista.mostrarMensaje(
-                    "No existen asientos seleccionados."
-            );
-
+            vista.mostrarMensaje("No existen asientos seleccionados.");
             vista.dispose();
             aplicacion.mostrarSeleccionAsientos();
             return;
@@ -100,8 +94,7 @@ public class ControladorCompra {
     //Construye una Venta nueva usando los datos de la vista.
     
     private boolean calcularCompra() {
-        Funcion funcion =
-                sesionCompra.getFuncionSeleccionada();
+        Funcion funcion = sesionCompra.getFuncionSeleccionada();
 
         Venta venta = new Venta(funcion);
 
