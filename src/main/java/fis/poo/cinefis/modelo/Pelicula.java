@@ -8,14 +8,18 @@ public class Pelicula {
     private String clasificacion;
     private int duracion;
     private String imagen;
+    private String sinopsis;
 
-    public Pelicula(String codigo, String titulo, String genero, String clasificacion, int duracion, String imagen) {
+    public Pelicula(String codigo, String titulo, String genero, 
+                    String clasificacion, int duracion, String imagen,
+                    String sinopsis) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.genero = genero;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
         this.imagen = imagen;
+        this.sinopsis = sinopsis;
     }
 
     public String getCodigo() {
@@ -41,6 +45,11 @@ public class Pelicula {
     public String getImagen() {
         return imagen;
     }
+
+    public String getSinopsis() {
+        return sinopsis;
+    }
+    
 
     @Override
     public String toString() {

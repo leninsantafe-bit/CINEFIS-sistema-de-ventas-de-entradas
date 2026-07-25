@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package fis.poo.cinefis.vista;
 
-/**
- *
- * @author ksang
- */
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
 public class VistaResumenCompra extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaResumenCompra.class.getName());
@@ -43,7 +38,7 @@ public class VistaResumenCompra extends javax.swing.JFrame {
         lblSubtotalSnacks = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         panelBotones = new javax.swing.JPanel();
-        btnNuevaCompra = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,7 +118,7 @@ public class VistaResumenCompra extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelTotalesLayout.createSequentialGroup()
                         .addComponent(lblSubtotalSnacks)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
                         .addComponent(lblTotal)
                         .addGap(28, 28, 28))))
         );
@@ -152,11 +147,11 @@ public class VistaResumenCompra extends javax.swing.JFrame {
             .addGap(0, 58, Short.MAX_VALUE)
         );
 
-        btnNuevaCompra.setBackground(new java.awt.Color(30, 40, 52));
-        btnNuevaCompra.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btnNuevaCompra.setForeground(new java.awt.Color(240, 240, 240));
-        btnNuevaCompra.setText("NUEVA COMPRA");
-        btnNuevaCompra.setFocusPainted(false);
+        btnRegresar.setBackground(new java.awt.Color(30, 40, 52));
+        btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(240, 240, 240));
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.setFocusPainted(false);
 
         btnFinalizar.setBackground(new java.awt.Color(218, 165, 32));
         btnFinalizar.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -177,7 +172,7 @@ public class VistaResumenCompra extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                         .addComponent(btnFinalizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNuevaCompra)
+                        .addComponent(btnRegresar)
                         .addGap(57, 57, 57))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -204,7 +199,7 @@ public class VistaResumenCompra extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalizar)
-                    .addComponent(btnNuevaCompra))
+                    .addComponent(btnRegresar))
                 .addGap(54, 54, 54)
                 .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -252,7 +247,7 @@ public class VistaResumenCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaResumen;
     private javax.swing.JButton btnFinalizar;
-    private javax.swing.JButton btnNuevaCompra;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JLabel lblSubtotalEntradas;
@@ -273,13 +268,26 @@ public class VistaResumenCompra extends javax.swing.JFrame {
         lblSubtotalSnacks.setText(String.format("Subtotal snacks: $%.2f", subtotalSnacks));
         lblTotal.setText(String.format("Total a pagar: $%.2f", total));
     }
+    
+    public boolean confirmarVenta() {
+        int respuesta =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "¿Desea confirmar y registrar esta venta?",
+                        "Confirmar venta",
+                        javax.swing.JOptionPane.YES_NO_OPTION,
+                        javax.swing.JOptionPane.QUESTION_MESSAGE
+                );
 
-    public void agregarEventoFinalizar(java.awt.event.ActionListener listener) {
+        return respuesta == javax.swing.JOptionPane.YES_OPTION;
+    }
+
+    public void agregarEventoFinalizar(ActionListener listener) {
         btnFinalizar.addActionListener(listener);
     }
 
-    public void agregarEventoNuevaCompra(java.awt.event.ActionListener listener) {
-        btnNuevaCompra.addActionListener(listener);
+    public void agregarEventoRegresar(ActionListener listener) {
+        btnRegresar.addActionListener(listener);
     }
 
     public void mostrarMensaje(String mensaje) {

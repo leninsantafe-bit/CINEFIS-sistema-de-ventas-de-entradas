@@ -19,18 +19,21 @@ public class RepositorioPeliculas {
 
             // Lee el archivo línea por línea
             while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(";");
+                //-1 para que pueda conservar campos vacíos
+                String[] datos = linea.split(";",-1);
 
-                // Cada película debe tener 6 datos
-                if (datos.length == 6) {
+                // Cada película debe tener 7 datos
+                if (datos.length == 7) {
                     String codigo = datos[0];
                     String titulo = datos[1];
                     String genero = datos[2];
                     String clasificacion = datos[3];
                     int duracion = Integer.parseInt(datos[4]);
                     String imagen = datos[5];
+                    String sinopsis = datos[6];
 
-                    Pelicula pelicula = new Pelicula(codigo, titulo, genero, clasificacion, duracion, imagen);
+                    Pelicula pelicula = new Pelicula(codigo, titulo, genero, 
+                                        clasificacion, duracion, imagen, sinopsis);
                     peliculas.add(pelicula);
                 }
             }

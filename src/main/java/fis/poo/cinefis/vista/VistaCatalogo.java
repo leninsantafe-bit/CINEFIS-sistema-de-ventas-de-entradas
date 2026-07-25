@@ -1,7 +1,9 @@
 package fis.poo.cinefis.vista;
 
 import fis.poo.cinefis.modelo.Funcion;
+import fis.poo.cinefis.modelo.Pelicula;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -23,7 +25,8 @@ public class VistaCatalogo extends javax.swing.JFrame {
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         configurarTabla();
-        configurarEventoSeleccionTabla();
+        configurarTextoSinopsis();
+        configurarEventoSeleccionTabla(); 
     }
 
     /**
@@ -42,9 +45,12 @@ public class VistaCatalogo extends javax.swing.JFrame {
         lblFunciones = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFunciones = new javax.swing.JTable();
+        lblSubtitulo1 = new javax.swing.JLabel();
         panelPoster = new javax.swing.JPanel();
         lblTituloPoster = new javax.swing.JLabel();
         lblPoster = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaSinopsis = new javax.swing.JTextArea();
         panelBotones = new javax.swing.JPanel();
         btnSeleccionarFuncion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -97,25 +103,38 @@ public class VistaCatalogo extends javax.swing.JFrame {
         tablaFunciones.setSelectionBackground(new java.awt.Color(218, 165, 32));
         jScrollPane1.setViewportView(tablaFunciones);
 
+        lblSubtitulo1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblSubtitulo1.setForeground(new java.awt.Color(240, 240, 240));
+        lblSubtitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSubtitulo1.setText("Seleccione una función:");
+
         javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
         panelTabla.setLayout(panelTablaLayout);
         panelTablaLayout.setHorizontalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblFunciones)
-                .addGap(222, 222, 222))
-            .addGroup(panelTablaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaLayout.createSequentialGroup()
+                        .addComponent(lblSubtitulo1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblFunciones)
+                        .addGap(206, 206, 206))))
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(lblFunciones)
-                .addGap(30, 30, 30)
+                .addContainerGap()
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addComponent(lblFunciones)
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaLayout.createSequentialGroup()
+                        .addComponent(lblSubtitulo1)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
@@ -133,6 +152,10 @@ public class VistaCatalogo extends javax.swing.JFrame {
         lblPoster.setForeground(new java.awt.Color(200, 200, 200));
         lblPoster.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txaSinopsis.setColumns(20);
+        txaSinopsis.setRows(5);
+        jScrollPane2.setViewportView(txaSinopsis);
+
         javax.swing.GroupLayout panelPosterLayout = new javax.swing.GroupLayout(panelPoster);
         panelPoster.setLayout(panelPosterLayout);
         panelPosterLayout.setHorizontalGroup(
@@ -140,9 +163,10 @@ public class VistaCatalogo extends javax.swing.JFrame {
             .addGroup(panelPosterLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(panelPosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloPoster)
-                    .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTituloPoster))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         panelPosterLayout.setVerticalGroup(
             panelPosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +174,9 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(lblTituloPoster)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -158,7 +184,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
 
         btnSeleccionarFuncion.setBackground(new java.awt.Color(218, 165, 32));
         btnSeleccionarFuncion.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btnSeleccionarFuncion.setText("SELECCIONAR FUNCIÓN");
+        btnSeleccionarFuncion.setText("CONTINUAR");
         btnSeleccionarFuncion.setFocusPainted(false);
         btnSeleccionarFuncion.setMaximumSize(new java.awt.Dimension(201, 88));
         btnSeleccionarFuncion.setMinimumSize(new java.awt.Dimension(201, 88));
@@ -171,7 +197,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSeleccionarFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSeleccionarFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
         panelBotonesLayout.setVerticalGroup(
@@ -309,9 +335,11 @@ public class VistaCatalogo extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSeleccionarFuncion;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFunciones;
     private javax.swing.JLabel lblPoster;
     private javax.swing.JLabel lblSubtitulo;
+    private javax.swing.JLabel lblSubtitulo1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTituloPoster;
     private javax.swing.JPanel panelBotones;
@@ -319,6 +347,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTabla;
     private javax.swing.JTable tablaFunciones;
+    private javax.swing.JTextArea txaSinopsis;
     // End of variables declaration//GEN-END:variables
     public void agregarEventoSeleccionarFuncion(java.awt.event.ActionListener listener) {
         btnSeleccionarFuncion.addActionListener(listener);
@@ -439,10 +468,42 @@ public class VistaCatalogo extends javax.swing.JFrame {
         return null;
     }
     
+    private void configurarTextoSinopsis(){
+        txaSinopsis.setEditable(false);
+        txaSinopsis.setLineWrap(true);
+        txaSinopsis.setWrapStyleWord(true);
+        txaSinopsis.setFocusable(false);
+        txaSinopsis.setText("Seleccione una función para ver la sinopsis.");
+    }
+    
+    private void mostrarInformacionPelicula(Funcion funcion) {
+        if (funcion == null || funcion.getPelicula() == null) {
+
+            lblPoster.setIcon(null);
+            mostrarSinopsis(
+                    "Seleccione una función para ver la sinopsis."
+            );
+            return;
+        }
+
+        mostrarPoster(funcion);
+        mostrarSinopsis(funcion.getPelicula().getSinopsis());
+    }
+    
+    public void mostrarSinopsis(String sinopsis) {
+        if (sinopsis == null || sinopsis.isBlank()) {
+            txaSinopsis.setText("Sinopsis no disponible.");
+        } else {
+            txaSinopsis.setText(sinopsis);
+        }
+
+        txaSinopsis.setCaretPosition(0);
+    }
+    
     private void mostrarPoster(Funcion funcion) {
         String nombreImagen = funcion.getPelicula().getImagen();
 
-        lblPoster.setIcon(new javax.swing.ImageIcon(
+        lblPoster.setIcon(new ImageIcon(
             getClass().getResource("/imagenes/peliculas/" + nombreImagen)
         ));
 
@@ -455,7 +516,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 Funcion funcion = obtenerFuncionSeleccionada();
 
                 if (funcion != null) {
-                    mostrarPoster(funcion);
+                    mostrarInformacionPelicula(funcion);
                 }
             }
         });
