@@ -4,6 +4,7 @@ import fis.poo.cinefis.modelo.DetalleSnack;
 import fis.poo.cinefis.modelo.Entrada;
 import fis.poo.cinefis.modelo.Funcion;
 import fis.poo.cinefis.modelo.SesionCompra;
+import fis.poo.cinefis.modelo.Usuario;
 import fis.poo.cinefis.modelo.Venta;
 import fis.poo.cinefis.repositorio.RepositorioAsientosOcupados;
 import fis.poo.cinefis.repositorio.RepositorioVentas;
@@ -41,10 +42,7 @@ public class ControladorResumenCompra {
         Venta venta = sesionCompra.getVenta();
 
         if (venta == null || !venta.tieneEntradas()) {
-            vista.mostrarMensaje(
-                    "No existe una compra calculada."
-            );
-
+            vista.mostrarMensaje("No existe una compra calculada.");
             vista.dispose();
             aplicacion.mostrarCompra();
             return;
@@ -57,8 +55,7 @@ public class ControladorResumenCompra {
     }
 
     private void mostrarVenta(Venta venta) {
-        String resumen =
-                generarResumen(venta);
+        String resumen = generarResumen(venta);
 
         vista.mostrarResumen(resumen);
 
@@ -93,6 +90,10 @@ public class ControladorResumenCompra {
 
         resumen.append("Hora: ")
                 .append(funcion.getHora())
+                .append("\n");
+        //Muestra que usuario vendió la entrada
+        resumen.append("Atendido por: ")
+                .append(sesionCompra.getUsuarioAutenticado().getUsername())
                 .append("\n\n");
 
         resumen.append("ENTRADAS:\n");
@@ -203,6 +204,7 @@ public class ControladorResumenCompra {
         if (ventaRegistrada) {
             return true;
         }
+        Usuario usuario = sesionCompra.getUsuarioAutenticado();
         Venta venta = sesionCompra.getVenta();
         
         if (venta == null) {
@@ -239,7 +241,7 @@ public class ControladorResumenCompra {
         }
 
         //Primero se guarda el registro completo de la venta.
-        boolean ventaGuardada = repositorioVentas.guardarVenta(venta);
+        boolean ventaGuardada = repositorioVentas.guardarVenta(venta, usuario);
 
         if (!ventaGuardada) {
             vista.mostrarMensaje(

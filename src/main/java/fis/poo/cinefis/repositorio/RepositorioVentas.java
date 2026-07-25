@@ -2,6 +2,7 @@ package fis.poo.cinefis.repositorio;
 
 import fis.poo.cinefis.modelo.DetalleSnack;
 import fis.poo.cinefis.modelo.Entrada;
+import fis.poo.cinefis.modelo.Usuario;
 import fis.poo.cinefis.modelo.Venta;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -45,7 +46,7 @@ public class RepositorioVentas {
         }
     }
 
-    public boolean guardarVenta(Venta venta) {
+    public boolean guardarVenta(Venta venta, Usuario usuario) {
         if (venta == null
                 || venta.getFuncion() == null
                 || venta.getEntradas().isEmpty()) {
@@ -54,11 +55,9 @@ public class RepositorioVentas {
         }
 
         try (BufferedWriter bw =
-                     new BufferedWriter(
-                             new FileWriter(rutaArchivo, true)
-                     )) {
+                     new BufferedWriter(new FileWriter(rutaArchivo, true))) {
 
-            bw.write(construirRegistroVenta(venta));
+            bw.write(construirRegistroVenta(venta, usuario));
             bw.newLine();
 
             return true;
@@ -73,12 +72,14 @@ public class RepositorioVentas {
         }
     }
 
-    private String construirRegistroVenta(Venta venta) {
-        String fechaVenta =
-                LocalDateTime.now().format(formatoFecha);
-
-        String codigoFuncion =
-                venta.getFuncion().getCodigo();
+    private String construirRegistroVenta(Venta venta, Usuario usuario) {
+        String fechaVenta = LocalDateTime.now().format(formatoFecha);
+        
+        String username = usuario.getUsername();
+        
+        String rol = usuario.getRol();
+        
+        String codigoFuncion = venta.getFuncion().getCodigo();
 
         String pelicula =
                 venta.getFuncion()
@@ -97,6 +98,10 @@ public class RepositorioVentas {
                 construirTextoSnacks(venta);
 
         return fechaVenta
+                + ";"
+                + username
+                + ";"
+                + rol
                 + ";"
                 + limpiarTexto(codigoFuncion)
                 + ";"
@@ -132,27 +137,13 @@ public class RepositorioVentas {
                 texto.append("|");
             }
 
-            texto.append(
-                    limpiarTexto(entrada.getAsiento())
-            );
+            texto.append(limpiarTexto(entrada.getAsiento()));
 
-            texto.append(",")
-                    .append(entrada.getEdad());
+            texto.append(",").append(entrada.getEdad());
 
-            texto.append(",")
-                    .append(
-                            limpiarTexto(
-                                    entrada.getTipoCliente()
-                            )
-                    );
+            texto.append(",").append(limpiarTexto(entrada.getTipoCliente()));
 
-            texto.append(",")
-                    .append(
-                            String.format(
-                                    "%.2f",
-                                    entrada.getPrecio()
-                            )
-                    );
+            texto.append(",").append(String.format("%.2f",entrada.getPrecio()));
         }
 
         return texto.toString();
@@ -172,22 +163,11 @@ public class RepositorioVentas {
                 texto.append("|");
             }
 
-            texto.append(
-                    limpiarTexto(
-                            detalle.getSnack().getNombre()
-                    )
-            );
+            texto.append(limpiarTexto(detalle.getSnack().getNombre()));
 
-            texto.append(",")
-                    .append(detalle.getCantidad());
+            texto.append(",").append(detalle.getCantidad());
 
-            texto.append(",")
-                    .append(
-                            String.format(
-                                    "%.2f",
-                                    detalle.calcularSubtotal()
-                            )
-                    );
+            texto.append(",").append(String.format("%.2f",detalle.calcularSubtotal()));
         }
 
         return texto.toString();
@@ -197,7 +177,6 @@ public class RepositorioVentas {
         if (texto == null) {
             return "";
         }
-
         return texto
                 .replace(";", " ")
                 .replace("|", " ")

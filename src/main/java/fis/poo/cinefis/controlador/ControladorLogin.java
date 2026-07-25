@@ -1,14 +1,14 @@
 package fis.poo.cinefis.controlador;
 
 import fis.poo.cinefis.modelo.Usuario;
+import fis.poo.cinefis.repositorio.RepositorioUsuarios;
 import fis.poo.cinefis.vista.VistaLogin;
 
 public class ControladorLogin {
 
     private final VistaLogin vista;
     private final ControladorAplicacion aplicacion;
-    //Usuario temporal
-    private final Usuario usuarioAdministrador;
+    private final RepositorioUsuarios repositorioUsuarios;
 
     public ControladorLogin(
             VistaLogin vista,
@@ -17,8 +17,7 @@ public class ControladorLogin {
         this.vista = vista;
         this.aplicacion = aplicacion;
 
-        usuarioAdministrador =
-                new Usuario("admin", "1234", "Administrador");
+        repositorioUsuarios = new RepositorioUsuarios();
     }
 
     public void iniciar() {
@@ -32,33 +31,30 @@ public class ControladorLogin {
     }
 
     private void iniciarSesion() {
-        String nombreUsuario = vista.obtenerUsuario().trim();
+        String username = vista.obtenerUsuario().trim();
+
         String contrasena = vista.obtenerContrasena();
 
-        if (nombreUsuario.isEmpty() || contrasena.isEmpty()) {
-            vista.mostrarMensaje(
-                    "Ingrese el usuario y la contraseña."
-            );
+        if (username.isEmpty()|| contrasena.isEmpty()) {
+            vista.mostrarMensaje("Ingrese el usuario y la contraseña.");
             return;
         }
 
-        boolean credencialesCorrectas =
-                usuarioAdministrador.validarCredenciales(
-                        nombreUsuario,
-                        contrasena
-                );
+        Usuario usuario = repositorioUsuarios.autenticar(username, contrasena);
 
-        if (!credencialesCorrectas) {
-            vista.mostrarMensaje(
-                    "Usuario o contraseña incorrectos."
-            );
-
-            vista.limpiarCampos();
+        if (usuario == null) {
+            vista.mostrarMensaje("Usuario o contraseña incorrectos.");
             return;
         }
 
-        vista.mostrarMensaje("Inicio de sesión correcto.");
-
+        vista.mostrarMensaje(
+                "Bienvenido, "
+                + usuario.getUsername()
+                + "\nRol: "
+                + usuario.getRol()
+        );
+        aplicacion.establecerUsuarioAutenticado(usuario);
+        
         vista.dispose();
         aplicacion.mostrarCatalogo();
     }
