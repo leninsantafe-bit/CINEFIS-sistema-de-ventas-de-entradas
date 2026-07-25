@@ -1,0 +1,3 @@
+
+2026-07-24 16:59:17;F006;Spider-Man No Way Home;Sala VIP;C3,22,Adulto,6,50;Canguil,1,2,50|Nachos,1,3,00;6,50;5,50;12,00
+2026-07-24 18:04:09;F003;Intensamente 2;Sala 3;A1,15,Adulto,5,00|A2,25,Adulto,5,00;Canguil,1,2,50;10,00;2,50;12,50
