@@ -2,3 +2,4 @@
 2026-07-25 10:23:21;admin;Administrador;F006;Spider-Man No Way Home;Sala VIP;B2,12,Niño,3,90|B3,21,Adulto,6,50;Gaseosa,5,7,50|Nachos,2,6,00;10,40;13,50;23,90
 2026-07-27 08:09:07;Invitado;Pruebas;F008;Super Mario Bros La Película;Sala 2;A1,12,Niño,2,70|A2,32,Adulto,4,50;SIN_SNACKS;7,20;0,00;7,20
 2026-07-27 08:44:55;Invitado;Pruebas;F014;nuevaPelicula;Sala VIP;B1,12,Niño,14,10|D2,32,Adulto,23,50;SIN_SNACKS;37,60;0,00;37,60
+2026-07-27 11:29:03;Invitado;Pruebas;F013;holo;Sala 3;B2,12,Niño,1.50|C3,31,Adulto,2.50;Canguil,1,2.50|Gaseosa,2,3.00|Nachos,2,6.00;4.00;11.50;15.50

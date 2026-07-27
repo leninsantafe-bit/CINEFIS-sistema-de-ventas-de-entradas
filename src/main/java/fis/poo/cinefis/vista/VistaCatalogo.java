@@ -439,6 +439,8 @@ public class VistaCatalogo extends javax.swing.JFrame {
         tablaFunciones.getColumnModel().getColumn(5).setPreferredWidth(100);  // Fecha
         tablaFunciones.getColumnModel().getColumn(6).setPreferredWidth(70);   // Hora
         tablaFunciones.getColumnModel().getColumn(7).setPreferredWidth(70);   // Precio
+        //para que haya mas espacio para mostrar
+        tablaFunciones.setPreferredScrollableViewportSize(new java.awt.Dimension(tablaFunciones.getPreferredSize().width, 300));
     }
     
     
@@ -462,10 +464,11 @@ public class VistaCatalogo extends javax.swing.JFrame {
             });
         }
 
-        // --- AGREGA ESTAS DOS LÍNEAS AQUÍ ---
+        tablaFunciones.setPreferredSize(null);
+        
+        //Obliga al JScrollPane a recalcular el tamaño y mostrar la barra
         tablaFunciones.revalidate();
         tablaFunciones.repaint();
-        // -------------------------------------
 
         lblPoster.setIcon(null);
         lblPoster.setText("Seleccione una función");

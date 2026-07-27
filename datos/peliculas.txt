@@ -10,3 +10,6 @@ P009;Coco;Animación;Todo público;105;coco.png;Miguel viaja accidentalmente al 
 P010;Jurassic World;Aventura;+12;124;jurassic.png;Un dinosaurio creado genéticamente escapa en un parque temático y pone en peligro a todos sus visitantes.
 P011;holo;Ciencia Ficción;+16;0;holo.jfif;notengo idea que poner
 P012;nuevaPelicula;Aventura;+12;0;nuevaPelicula.jfif;nadie sabe como paso muaahjjajajaja
+P014;no es pais para viejos;Acción;Todo Público;1;blasdasd.jpg;kajsdnkajsdnasjkdasd
+P015;otra pelicula muajajaj;Ciencia Ficción;+18;1;otra_pelicula_muajajaj.jpg;no tiene sinopsisi bla al
+P016;nose como se llama;Comedia;+16;1;nose_como_se_llama.jpg;no tiene nada de sinopsis
