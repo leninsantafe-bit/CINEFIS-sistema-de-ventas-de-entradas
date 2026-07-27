@@ -2,6 +2,7 @@ package fis.poo.cinefis.vista;
 
 import fis.poo.cinefis.modelo.Funcion;
 import fis.poo.cinefis.modelo.Pelicula;
+import fis.poo.cinefis.repositorio.RepositorioFunciones;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,8 @@ public class VistaCatalogo extends javax.swing.JFrame {
         configurarTabla();
         configurarTextoSinopsis();
         configurarEventoSeleccionTabla(); 
+        RepositorioFunciones repo = new RepositorioFunciones();
+        mostrarFunciones(repo.obtenerFunciones());
     }
 
     /**
@@ -174,8 +177,10 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 .addGroup(panelPosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloPoster1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTituloPoster))
+                    .addComponent(lblTituloPoster)
+                    .addGroup(panelPosterLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(lblPoster, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         panelPosterLayout.setVerticalGroup(

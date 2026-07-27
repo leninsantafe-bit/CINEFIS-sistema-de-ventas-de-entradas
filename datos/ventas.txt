@@ -1,1 +1,2 @@
 2026-07-25 02:31:43;admin;Administrador;F001;Minecraft La Película;Sala 1;D5,15,Adulto,5,00;SIN_SNACKS;5,00;0,00;5,00
+2026-07-25 10:23:21;admin;Administrador;F006;Spider-Man No Way Home;Sala VIP;B2,12,Niño,3,90|B3,21,Adulto,6,50;Gaseosa,5,7,50|Nachos,2,6,00;10,40;13,50;23,90

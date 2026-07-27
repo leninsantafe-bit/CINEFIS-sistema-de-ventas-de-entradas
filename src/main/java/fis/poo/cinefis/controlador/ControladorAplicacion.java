@@ -5,6 +5,7 @@ import fis.poo.cinefis.modelo.Usuario;
 import fis.poo.cinefis.vista.VistaCatalogo;
 import fis.poo.cinefis.vista.VistaCompra;
 import fis.poo.cinefis.vista.VistaLogin;
+import fis.poo.cinefis.vista.VistaRegistroPeliculas;
 import fis.poo.cinefis.vista.VistaResumenCompra;
 import fis.poo.cinefis.vista.VistaSeleccionAsientos;
 
@@ -32,7 +33,7 @@ public class ControladorAplicacion {
 
         controladorLogin.iniciar();
     }
-
+    
     public void mostrarCatalogo() {
         VistaCatalogo vistaCatalogo = new VistaCatalogo();
 
@@ -108,5 +109,9 @@ public class ControladorAplicacion {
     public void cerrarSesion() {
         sesionCompra.cerrarSesion();
         mostrarLogin();
+    }
+    public void mostrarRegistroPeliculas() {
+        VistaRegistroPeliculas vistaRegistro = new VistaRegistroPeliculas();
+        vistaRegistro.setVisible(true);
     }
 }

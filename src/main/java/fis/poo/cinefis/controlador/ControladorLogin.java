@@ -41,12 +41,21 @@ public class ControladorLogin {
         }
 
         Usuario usuario = repositorioUsuarios.autenticar(username, contrasena);
-
+        
+        if (usuario.getRol().equals("Administrador")) {
+            vista.dispose(); 
+            aplicacion.mostrarRegistroPeliculas(); 
+        } 
+        
         if (usuario == null) {
             vista.mostrarMensaje("Usuario o contraseña incorrectos.");
             return;
         }
-
+        if (usuario.getRol().equals("Cajero")) {
+            vista.dispose(); 
+            aplicacion.mostrarCatalogo();
+            vista.dispose();
+        } 
         vista.mostrarMensaje(
                 "Bienvenido, "
                 + usuario.getUsername()
@@ -55,8 +64,8 @@ public class ControladorLogin {
         );
         aplicacion.establecerUsuarioAutenticado(usuario);
         
-        vista.dispose();
-        aplicacion.mostrarCatalogo();
+        
+        
     }
 
     private void salir() {

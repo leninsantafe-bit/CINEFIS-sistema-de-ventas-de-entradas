@@ -9,8 +9,7 @@ public class Usuario {
     public Usuario(
             String username,
             String contrasena,
-            String rol
-    ) {
+            String rol) {
         this.username = username;
         this.contrasena = contrasena;
         this.rol = rol;
