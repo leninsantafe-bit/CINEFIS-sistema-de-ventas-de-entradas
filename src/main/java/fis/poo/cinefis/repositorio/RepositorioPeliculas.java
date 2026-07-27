@@ -16,43 +16,59 @@ public class RepositorioPeliculas {
     public ArrayList<Pelicula> obtenerPeliculas() {
         ArrayList<Pelicula> peliculas = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(rutaArchivo))) {
             String linea;
+            int numeroLinea = 0; 
 
-            // Lee el archivo línea por línea
             while ((linea = br.readLine()) != null) {
-                //-1 para que pueda conservar campos vacíos
-                String[] datos = linea.split(";",-1);
+                numeroLinea++;
+                
+                if (linea.trim().isEmpty()) {
+                    continue; 
+                }
 
-                // Cada película debe tener 7 datos
+                String[] datos = linea.split(";", -1);
+
                 if (datos.length == 7) {
-                    String codigo = datos[0];
-                    String titulo = datos[1];
-                    String genero = datos[2];
-                    String clasificacion = datos[3];
-                    int duracion = Integer.parseInt(datos[4]);
-                    String imagen = datos[5];
-                    String sinopsis = datos[6];
+                    try {
+                        String codigo = datos[0].trim();
+                        String titulo = datos[1].trim();
+                        String genero = datos[2].trim();
+                        String clasificacion = datos[3].trim();
+                        int duracion = Integer.parseInt(datos[4].trim());
+                        String imagen = datos[5].trim();
+                        String sinopsis = datos[6].trim();
 
-                    Pelicula pelicula = new Pelicula(codigo, titulo, genero, 
-                                        clasificacion, duracion, imagen, sinopsis);
-                    peliculas.add(pelicula);
+                        Pelicula pelicula = new Pelicula(codigo, titulo, genero, 
+                                            clasificacion, duracion, imagen, sinopsis);
+                        peliculas.add(pelicula);
+                        
+                    } catch (NumberFormatException ex) {
+                        System.out.println("❌ ERROR PELÍCULA (Línea " + numeroLinea + "): La duración no es un número válido. Línea: " + linea);
+                    }
+                } else {
+                    System.out.println("❌ ERROR PELÍCULA (Línea " + numeroLinea + "): Faltan o sobran datos (no son 7). Línea: " + linea);
                 }
             }
-
-        } catch (IOException e) {
+        } catch (java.io.IOException e) {
             System.out.println("Error al leer peliculas.txt: " + e.getMessage());
         }
 
         return peliculas;
     }
 
-    public Pelicula buscarPorCodigo(String codigo) {
+    public Pelicula buscarPorCodigo(String codigoBusqueda) {
         ArrayList<Pelicula> peliculas = obtenerPeliculas();
 
-        // Busca una película usando su código
+        if (codigoBusqueda == null) {
+            return null;
+        }
+
+        String codigoLimpiado = codigoBusqueda.trim();
+
+        // Busca una película usando su código de forma estricta pero limpia
         for (Pelicula pelicula : peliculas) {
-            if (pelicula.getCodigo().equals(codigo)) {
+            if (pelicula.getCodigo() != null && pelicula.getCodigo().trim().equalsIgnoreCase(codigoLimpiado)) {
                 return pelicula;
             }
         }

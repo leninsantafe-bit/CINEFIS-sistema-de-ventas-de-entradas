@@ -75,9 +75,9 @@ public class RepositorioVentas {
     private String construirRegistroVenta(Venta venta, Usuario usuario) {
         String fechaVenta = LocalDateTime.now().format(formatoFecha);
         
-        String username = usuario.getUsername();
-        
-        String rol = usuario.getRol();
+        String username = (usuario != null) ? usuario.getUsername() : "Invitado";
+
+        String rol = (usuario != null) ? usuario.getRol() : "Pruebas";
         
         String codigoFuncion = venta.getFuncion().getCodigo();
 

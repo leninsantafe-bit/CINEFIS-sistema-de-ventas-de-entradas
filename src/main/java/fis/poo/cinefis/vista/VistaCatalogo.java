@@ -1,7 +1,6 @@
 package fis.poo.cinefis.vista;
 
 import fis.poo.cinefis.modelo.Funcion;
-import fis.poo.cinefis.modelo.Pelicula;
 import fis.poo.cinefis.repositorio.RepositorioFunciones;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -409,7 +408,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
         tablaFunciones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         // Estilo general de la tabla
-        tablaFunciones.setRowHeight(28);
+        tablaFunciones.setRowHeight(22);
         tablaFunciones.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
         tablaFunciones.setBackground(new java.awt.Color(245, 245, 245));
         tablaFunciones.setForeground(new java.awt.Color(0, 0, 0));
@@ -449,7 +448,7 @@ public class VistaCatalogo extends javax.swing.JFrame {
         modelo.setRowCount(0);
 
         listaFunciones = new ArrayList<>(funciones);
-
+ 
         for (Funcion funcion : listaFunciones) {
             modelo.addRow(new Object[]{
                 funcion.getCodigo(),
@@ -462,6 +461,11 @@ public class VistaCatalogo extends javax.swing.JFrame {
                 String.format("$%.2f", funcion.getPrecioBase())
             });
         }
+
+        // --- AGREGA ESTAS DOS LÍNEAS AQUÍ ---
+        tablaFunciones.revalidate();
+        tablaFunciones.repaint();
+        // -------------------------------------
 
         lblPoster.setIcon(null);
         lblPoster.setText("Seleccione una función");

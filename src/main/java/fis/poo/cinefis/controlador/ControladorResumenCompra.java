@@ -92,9 +92,15 @@ public class ControladorResumenCompra {
                 .append(funcion.getHora())
                 .append("\n");
         //Muestra que usuario vendió la entrada
-        resumen.append("Atendido por: ")
-                .append(sesionCompra.getUsuarioAutenticado().getUsername())
-                .append("\n\n");
+       resumen.append("Atendido por: ");
+        
+        if (sesionCompra.getUsuarioAutenticado() != null) {
+            resumen.append(sesionCompra.getUsuarioAutenticado().getUsername());
+        } else {
+            resumen.append("Invitado (Modo Pruebas)");
+        }
+        
+        resumen.append("\n\n");
 
         resumen.append("ENTRADAS:\n");
 

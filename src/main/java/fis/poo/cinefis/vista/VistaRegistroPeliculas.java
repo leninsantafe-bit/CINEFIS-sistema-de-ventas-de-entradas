@@ -4,6 +4,8 @@
  */
 package fis.poo.cinefis.vista;
 
+import fis.poo.cinefis.controlador.ControladorAplicacion;
+import fis.poo.cinefis.controlador.ControladorLogin;
 import fis.poo.cinefis.modelo.Funcion;
 import fis.poo.cinefis.modelo.Pelicula;
 import fis.poo.cinefis.modelo.Sala;
@@ -40,6 +42,7 @@ import javax.swing.JOptionPane;
         configurarArrastrarYSoltar();
         cargarDatosComboBox();
         configurarListeners();
+        agregarEventoCerrarSesion();
     }
     
     private void configurarListeners() {
@@ -53,9 +56,9 @@ import javax.swing.JOptionPane;
                 String genero = CbGenero.getSelectedItem().toString();
                 String clasificacion = CbClasificacion.getSelectedItem().toString();
                 String sala = CbSala.getSelectedItem().toString();
-                int duracion=0;
+                int duracion=1;
                 String sinopsis = txtSinopsis.getText().trim();
-                
+                String codigoSala="";
                 if (titulo.isEmpty() || fecha.isEmpty() || hora.isEmpty() || textoPrecio.isEmpty()) {
                     javax.swing.JOptionPane.showMessageDialog(null, "Por favor, llene todos los campos de texto.");
                     return; 
@@ -65,47 +68,73 @@ import javax.swing.JOptionPane;
                     precioFinal = Double.parseDouble(textoPrecio);
                 } catch (NumberFormatException e) {
                     javax.swing.JOptionPane.showMessageDialog(null, "El precio es inválido. Use números (Ej: 5.50)");
-                    return; // Cortamos la ejecución aquí
+                    return; 
                 }
 
                 if (!fecha.isEmpty()) {
                     try {
-                        // Le decimos cuál es el formato estricto que esperamos
+                        // Le digo cuál es el formato estricto que espero
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                         // Intentamos convertir el texto a una Fecha real
                         LocalDate.parse(fecha, formatter);
 
-                        // Si el código llega aquí y no saltó al 'catch', la fecha es perfecta
+                        
 
                     } catch (DateTimeParseException e) {
-                        // Si el usuario escribió "hola" o "32/01/2026", Java lanza este error
+                        
                         JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Use DD/MM/YYYY (Ej: 25/12/2026)", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
                         
-                        txtFecha.setText(""); // Borramos el texto malo
-                        fecha = "";  // Reiniciamos la variable
+                        txtFecha.setText(""); 
+                        fecha = "";  
                         
                         return; 
                     }
                 }
-            
-                // 1. Primero creas los objetos (instancias) de ambos repositorios
+                                // 1. Instancias los tres repositorios necesarios
                 RepositorioFunciones repoFunciones = new RepositorioFunciones();
                 RepositorioPeliculas repoPeliculas = new RepositorioPeliculas();
+                fis.poo.cinefis.repositorio.RepositorioSalas repoSalas = new fis.poo.cinefis.repositorio.RepositorioSalas();
 
-                // 2. Ahora llamas a los métodos usando esos objetos (en minúscula)
+                // 2. Buscamos la sala real en tu base de datos (.txt) que coincida con el ComboBox
+                Sala salaReal = null;
+                for (Sala sTemp : repoSalas.obtenerSalas()) {
+                    if (sTemp.getNombre().equalsIgnoreCase(sala)) { // 'sala' es el texto de tu ComboBox
+                        salaReal = sTemp;
+                        break; 
+                    }
+                }
+
+                // 3. Validamos por seguridad
+                if (salaReal == null) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Error: No se encontró la sala seleccionada en la base de datos.");
+                    return;
+                }
+
+                // 4. Generamos los códigos y creamos los objetos
                 String codFuncion = repoFunciones.generarSiguienteCodigoFuncion();
                 String codPelicula = repoPeliculas.generarSiguienteCodigoPelicula();
-                Pelicula p = new Pelicula(codPelicula, titulo, genero, clasificacion,duracion,RutaImagen,sinopsis);
-                Sala s = new Sala(codFuncion, sala,20);
-                Funcion nuevaFuncion = new Funcion(codFuncion, p, s, fecha, hora, precioFinal);
+                Pelicula p = new Pelicula(codPelicula, titulo, genero, clasificacion, duracion, RutaImagen, sinopsis);
+
+              
+                Funcion nuevaFuncion = new Funcion(codFuncion, p, salaReal, fecha, hora, precioFinal);
                 
                 repoPeliculas.guardarNuevaPelicula(p);           // 1ro Guardamos la película
                 repoFunciones.guardarNuevaFuncion(nuevaFuncion);
-                mostrarFunciones(repoFunciones.obtenerFunciones());
-                    
-
+                RepositorioFunciones repoFresco = new RepositorioFunciones();
+                mostrarFunciones(repoFresco.obtenerFunciones());
                 javax.swing.JOptionPane.showMessageDialog(null, "¡Película registrada con éxito!");
+                txtNombrePelicula.setText("");
+                txtFecha.setText("");
+                txtHora.setText("");
+                txtPrecio.setText("");
+                txtSinopsis.setText("");
+                CbGenero.setSelectedIndex(-1);
+                CbClasificacion.setSelectedIndex(-1);
+                CbSala.setSelectedIndex(-1);
+                lblNuevoPoster.setIcon(null);
+                lblNuevoPoster.setText("Arrastre el póster aquí");
+                
             }
         });
     }      
@@ -142,7 +171,7 @@ import javax.swing.JOptionPane;
     // 2. Definimos nuestros ArrayLists o Arreglos con los datos
     String[] generos = {"Acción", "Comedia", "Drama", "Ciencia Ficción", "Terror","Aventura","Animacion"};
     String[] clasificaciones = {"Todo Público", "+12", "+16", "+18"};
-    String[] salas = {"Sala 1", "Sala 2", "Sala 3", "Sala 4 (VIP)","Sala VIP"};
+    String[] salas = {"Sala 1", "Sala 2", "Sala 3","Sala 4","Sala VIP"};
     
     // 3. Llenamos los ComboBox
     for (String genero : generos) {
@@ -155,8 +184,29 @@ import javax.swing.JOptionPane;
         CbSala.addItem(sala);
     }
 }
-    
-    
+    public void agregarEventoCerrarSesion() {
+    // Aquí le decimos al botón qué hacer cuando le hagan clic
+    btnCerra.addActionListener(new java.awt.event.ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            
+            // 1. Creamos la vista del Login
+            VistaLogin vistaLogin = new VistaLogin();
+
+            // 2. Creamos una NUEVA instancia de la aplicación para reiniciar el sistema
+            ControladorAplicacion aplicacion = new ControladorAplicacion();
+
+            // 3. Creamos el Controlador y le pasamos los 2 parámetros que pide tu código
+            ControladorLogin controladorLogin = new ControladorLogin(vistaLogin, aplicacion);
+
+            // 4. ¡La pieza clave! Llamamos a iniciar para conectar los botones
+            controladorLogin.iniciar(); 
+
+            // 5. Cerramos la ventana actual en la que estás
+            dispose(); 
+        }
+    });
+}
     /**
      * Creates new form VistaRegistroPeliculas
      */
@@ -192,7 +242,7 @@ import javax.swing.JOptionPane;
                 if (!files.isEmpty()) {
                     File archivoImagen = files.get(0);
                     
-                    // --- NUEVA LÓGICA: OBTENER EL TÍTULO Y GUARDAR ---
+            
                     
                     // Obtenemos el texto del campo del nombre de la película
                     // (Asegúrate de que txtNombre sea el nombre correcto de tu JTextField)

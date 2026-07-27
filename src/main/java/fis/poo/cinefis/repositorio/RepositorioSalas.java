@@ -39,16 +39,22 @@ public class RepositorioSalas {
         return salas;
     }
 
-    public Sala buscarPorCodigo(String codigo) {
-        ArrayList<Sala> salas = obtenerSalas();
+    public Sala buscarPorCodigo(String codigoBusqueda) {
+    ArrayList<Sala> salas = obtenerSalas();
 
-        // Busca una sala usando su código
-        for (Sala sala : salas) {
-            if (sala.getCodigo().equals(codigo)) {
-                return sala;
-            }
-        }
-
+    if (codigoBusqueda == null) {
         return null;
     }
+
+    String codigoLimpiado = codigoBusqueda.trim();
+
+    // Busca una sala usando su código de forma segura, ignorando espacios y mayúsculas
+    for (Sala sala : salas) {
+        if (sala.getCodigo() != null && sala.getCodigo().trim().equalsIgnoreCase(codigoLimpiado)) {
+            return sala;
+        }
+    }
+
+    return null;
+}
 }

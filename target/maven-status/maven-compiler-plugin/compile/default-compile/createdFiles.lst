@@ -28,6 +28,7 @@ fis\poo\cinefis\controlador\ControladorCompra.class
 fis\poo\cinefis\controlador\ControladorResumenCompra.class
 fis\poo\cinefis\modelo\Pelicula.class
 fis\poo\cinefis\modelo\Venta.class
+fis\poo\cinefis\vista\VistaRegistroPeliculas$3.class
 fis\poo\cinefis\estrategia\PrecioFactory.class
 fis\poo\cinefis\modelo\SesionCompra.class
 fis\poo\cinefis\controlador\ControladorSeleccionAsientos.class

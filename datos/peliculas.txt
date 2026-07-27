@@ -8,4 +8,5 @@ P007;Avatar El Camino del Agua;Ciencia ficción;+12;192;avatar.png;Jake Sully y 
 P008;Rápidos y Furiosos X;Acción;+12;141;rapidos.png;Dominic Toretto y su familia se enfrentan a un enemigo decidido a vengarse por acontecimientos ocurridos en el pasado.
 P009;Coco;Animación;Todo público;105;coco.png;Miguel viaja accidentalmente al mundo de los muertos, donde busca descubrir la historia de su familia y cumplir su sueño musical.
 P010;Jurassic World;Aventura;+12;124;jurassic.png;Un dinosaurio creado genéticamente escapa en un parque temático y pone en peligro a todos sus visitantes.
-
+P011;holo;Ciencia Ficción;+16;0;holo.jfif;notengo idea que poner
+P012;nuevaPelicula;Aventura;+12;0;nuevaPelicula.jfif;nadie sabe como paso muaahjjajajaja

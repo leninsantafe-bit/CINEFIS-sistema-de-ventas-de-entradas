@@ -19,67 +19,81 @@ public class RepositorioFunciones {
     private RepositorioPeliculas repositorioPeliculas = new RepositorioPeliculas();
     private RepositorioSalas repositorioSalas = new RepositorioSalas();
 
-    public ArrayList<Funcion> obtenerFunciones() {
+   public ArrayList<Funcion> obtenerFunciones() {
         ArrayList<Funcion> funciones = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(rutaArchivo))) {
             String linea;
+            int numeroLinea = 0;
 
             // Lee cada función registrada en el archivo
             while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(";");
+                numeroLinea++;
+                
+                // Ignorar líneas vacías
+                if (linea.trim().isEmpty()) {
+                    continue;
+                }
+
+                String[] datos = linea.split(";", -1);
 
                 // Cada función debe tener 6 datos
                 if (datos.length == 6) {
-                    String codigoFuncion = datos[0];
-                    String codigoPelicula = datos[1];
-                    String codigoSala = datos[2];
-                    String fecha = datos[3];
-                    String hora = datos[4];
-                    double precioBase = Double.parseDouble(datos[5]);
+                    try {
+                        String codigoFuncion = datos[0].trim();
+                        String codigoPelicula = datos[1].trim();
+                        String codigoSala = datos[2].trim();
+                        String fecha = datos[3].trim();
+                        String hora = datos[4].trim();
+                        double precioBase = Double.parseDouble(datos[5].trim()); // Blindado con trim()
 
-                    // Busca los objetos reales usando sus códigos
-                    Pelicula pelicula = repositorioPeliculas.buscarPorCodigo(codigoPelicula);
-                    Sala sala = repositorioSalas.buscarPorCodigo(codigoSala);
+                        Pelicula pelicula = repositorioPeliculas.buscarPorCodigo(codigoPelicula);
+                        Sala sala = repositorioSalas.buscarPorCodigo(codigoSala);
 
-                    // Solo crea la función si encontró la película y la sala
-                    if (pelicula != null && sala != null) {
-                        Funcion funcion = new Funcion(codigoFuncion, pelicula, sala, fecha, hora, precioBase);
-                        funciones.add(funcion);
-                    }else {
-                       
-                        System.out.println("=========================================");
-                        System.out.println("ERROR SILENCIOSO: Se ignoró la función " + codigoFuncion);
-                        if (pelicula == null) {
-                            System.out.println("-> CULPABLE: No se encontró la película con código: " + codigoPelicula);
+                        if (pelicula != null && sala != null) {
+                            Funcion funcion = new Funcion(codigoFuncion, pelicula, sala, fecha, hora, precioBase);
+                            funciones.add(funcion);
+                        } else {
+                            // Este error saldrá si no encuentra la sala o la película específica
+                            System.out.println("❌ ERROR (Línea " + numeroLinea + "): Se ignoró " + codigoFuncion 
+                                    + ". Película=" + (pelicula == null ? "NO ENCONTRADA" : "OK") 
+                                    + " | Sala=" + (sala == null ? "NO ENCONTRADA" : "OK"));
                         }
-                        if (sala == null) {
-                            System.out.println("-> CULPABLE: No se encontró la sala con código: " + codigoSala);
-                        }
-                        System.out.println("=========================================");
+                    } catch (NumberFormatException e) {
+                        System.out.println("❌ ERROR FUNCIONES (Línea " + numeroLinea + "): El precio no es un número válido. Línea: " + linea);
                     }
+                } else {
+                    System.out.println("❌ ERROR FUNCIONES (Línea " + numeroLinea + "): Faltan o sobran datos (son " + datos.length + " y deben ser 6). Línea: " + linea);
                 }
             }
-
-        } catch (IOException e) {
+        } catch (java.io.IOException e) {
             System.out.println("Error al leer funciones.txt: " + e.getMessage());
         }
+
+        // ¡Este es nuestro chismoso! Nos dirá cuántas funciones pasaron la prueba.
+        System.out.println("✅ TOTAL DE FUNCIONES CARGADAS PARA LA TABLA: " + funciones.size());
 
         return funciones;
     }
 
-    public Funcion buscarPorCodigo(String codigo) {
-        ArrayList<Funcion> funciones = obtenerFunciones();
+    public Funcion buscarPorCodigo(String codigoBusqueda) {
+    ArrayList<Funcion> funciones = obtenerFunciones();
 
-        // Busca una función usando su código
-        for (Funcion funcion : funciones) {
-            if (funcion.getCodigo().equals(codigo)) {
-                return funcion;
-            }
-        }
-
+    if (codigoBusqueda == null) {
         return null;
     }
+
+    String codigoLimpiado = codigoBusqueda.trim();
+
+    // Busca una función usando su código de forma segura, ignorando espacios y mayúsculas
+    for (Funcion funcion : funciones) {
+        if (funcion.getCodigo() != null && funcion.getCodigo().trim().equalsIgnoreCase(codigoLimpiado)) {
+            return funcion;
+        }
+    }
+
+    return null;
+}
     
     public void guardarNuevaFuncion(Funcion nuevaFuncion) {
         // El 'true' en FileWriter significa que va a agregar texto al final del archivo sin borrar lo anterior
